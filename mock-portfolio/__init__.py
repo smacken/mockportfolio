@@ -1,2 +1,1 @@
-  
-from mock-portfolio import config
+# from mock-portfolio import config
