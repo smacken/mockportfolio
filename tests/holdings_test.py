@@ -1,7 +1,9 @@
 ''' holdings tests '''
-# from mockportfolio import Holdings
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+from .mockportfolio import Holdings
 import pandas as pd
-import mockportfolio
+# import mockportfolio
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
@@ -11,7 +13,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfoli
 
 
 def test_ctor_holdings():
-    holdings = mockportfolio.Holdings()
+    holdings = Holdings()
     assert holdings is not None
 
 
@@ -21,6 +23,6 @@ def test_random_tick():
 
 
 def test_generate_builds_dataframe():
-    holdings = mockportfolio.Holdings()
+    holdings = Holdings()
     df = holdings.generate()
     assert isinstance(df, pd.DataFrame) is True
