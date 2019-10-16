@@ -1,10 +1,16 @@
 ''' mock portfolio '''
 
 import os.path
-import codecs  # To use a consistent encoding
+# import codecs  # To use a consistent encoding
 import setuptools
+import re
 
 here = os.path.abspath(os.path.dirname(__file__))
+
+with open("README.md", "r") as f:
+    desc = f.read()
+    desc = desc.split("<!-- content -->")[-1]
+    desc = re.sub("<[^<]+?>", "", desc)  # Remove html
 
 # Package name
 pname = 'mockportfolio'
@@ -18,14 +24,13 @@ setuptools.setup(
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version=__version__,
+    # version=__version__,
 
     description='Portfolio Engine',
-    long_description=long_description,
-
+    long_description=desc,
+    long_description_content_type="text/markdown",
     # The project's main homepage.
     url=gurl,
-    download_url=gdurl,
 
     # Author details
     author='Scott Mackenzie',
@@ -51,8 +56,7 @@ setuptools.setup(
         'Topic :: Office/Business :: Financial',
 
         # Pick your license as you wish (should match "license" above)
-        ('License :: OSI Approved :: ' +
-         'GNU General Public License v3 or later (GPLv3+)'),
+        ('License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)'),
 
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
@@ -88,9 +92,7 @@ setuptools.setup(
     # (e.g. development dependencies).
     # You can install these using the following syntax, for example:
     # $ pip install -e .[dev,test]
-    extras_require={
-        
-    },
+    extras_require={},
 
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
@@ -107,6 +109,6 @@ setuptools.setup(
     # "scripts" keyword. Entry points provide cross-platform support and allow
     # pip to create the appropriate form of executable for the target platform.
     # entry_points={'console_scripts': ['sample=sample:main',],},
-    
+
     # scripts=['tools/bt-run.py'],
 )
