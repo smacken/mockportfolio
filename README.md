@@ -1,10 +1,28 @@
 # Mock Portfolio
 
 Mock portfolio generator for sample accounts of a trading system.
+Can generate over time a portfolio that trades holdings with buy/sell transactions.
+Output is a dataset which you can use to develop a trading system; all without 
+requiring a tangible account.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+This project is available on PyPI, meaning that you can just:
+```bash
+pip install mockportfolio
+```
+
+Otherwise, clone/download the project and in the project directory run:
+```bash
+python setup.py install
+```
+
+### For Development
+
+If you would like to make major changes to integrate this with your proprietary system, it probably makes sense to clone this repository and to just use the source code.
+```bash
+git clone https://github.com/smacken/trading-mock-portfolio
+```
 
 ### Prerequisites
 
@@ -34,7 +52,10 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Full test suite can be run by using the following with pytest:
+```
+pytest
+```
 
 ### Break down into end to end tests
 
