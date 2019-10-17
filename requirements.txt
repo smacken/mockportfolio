@@ -28,7 +28,7 @@ rope==0.14.0
 six==1.12.0
 snowballstemmer==2.0.0
 toml==0.10.0
-virtualenv==16.7.5
+virtualenv==16.7.6
 wcwidth==0.1.7
 wincertstore==0.2
 zipp==0.6.0
