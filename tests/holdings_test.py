@@ -38,3 +38,10 @@ def test_random_ticks():
     asx = hold.listings()
     ticks = hold.random_ticks(asx)
     assert len(ticks.Tick.values) == 10
+
+
+# def test_portfolio(mocker):
+#     hold = Holdings()
+#     portfolio = hold.portfolio(None)
+#     print(portfolio)
+#     assert len(portfolio) == 10
