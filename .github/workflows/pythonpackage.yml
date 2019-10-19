@@ -30,7 +30,8 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=12 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pip install pytest, pytest-cov
+        pip install pytest
+        pip install pytest-cov
         pytest --cov=mockportfolio tests/
     - uses: codecov/codecov-action@v1.0.3
       with:
