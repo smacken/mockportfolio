@@ -1,5 +1,9 @@
 '''holdings generator'''
 import pandas as pd
+from pypfopt.efficient_frontier import EfficientFrontier
+from pypfopt import risk_models
+from pypfopt import expected_returns
+from pypfopt.discrete_allocation import DiscreteAllocation, get_latest_prices
 from .prices import Prices
 
 
@@ -27,6 +31,21 @@ class Holdings(object):
         ''' get a list of random tickers from the listings '''
         df = tickers.sample(n=tick_count)
         return df
+
+    def build_portfolio(self, price_pivot, portfolio_total=10000):
+        ''' build a portfolio '''
+        mu = expected_returns.mean_historical_return(price_pivot)
+        shrink = risk_models.CovarianceShrinkage(price_pivot)
+        S = shrink.ledoit_wolf()
+        ef = EfficientFrontier(mu, S, weight_bounds=(0, 0.2), gamma=0.8)
+        weights = ef.max_sharpe()
+        latest_prices = get_latest_prices(price_pivot)
+
+        da = DiscreteAllocation(weights, latest_prices, total_portfolio_value=portfolio_total)
+        allocation, leftover = da.lp_portfolio()
+        # print("Discrete allocation:", allocation)
+        weights = {k: v for k, v in weights.items() if weights[k] > 0.0}
+        return weights
 
     def portfolio(self, date_start, portfolio_size=10):
         ticks = self.random_ticks(self.listings())
