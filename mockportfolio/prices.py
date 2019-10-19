@@ -1,6 +1,6 @@
 ''' '''
 from yahoo_historical import Fetcher
-from datetime import datetime  # , timedelta
+from datetime import datetime, timedelta
 import pandas as pd
 
 
@@ -15,6 +15,15 @@ class Prices(object):
         date_list.extend([date.year, date.month, date.day])
         return date_list
 
+    def prev_weekday(self, adate):
+        ''' get the last trading day '''
+        if adate.weekday() <= 4:
+            return adate
+        adate -= timedelta(days=1)
+        while adate.weekday() > 4:  # Mon-Fri are 0-4
+            adate -= timedelta(days=1)
+        return adate
+
     def get_asx(self, tick, start_date, end_date):
         ''' get prices for date range '''
         tick_code = '%s.ax' % tick
@@ -24,25 +33,20 @@ class Prices(object):
         time_series.rename(columns=lambda x: x.strip(), inplace=True)
         return time_series
 
-    def update(self, tickers):
+    def update(self, tickers, start='2017-01-09'):
         ''' update prices for a given set of tickers '''
-
-        # get date
-        # datetime.strptime('Jan 1 2018  1:33PM', '%b %d %Y %I:%M%p').date()
-
         price_pkl = f'{self.data_path}Prices.pkl'
         try:
             price_data = pd.read_pickle(price_pkl)
         except Exception:
             price_data = pd.DataFrame(data={'Tick': []})
 
-        now = datetime.now()
+        now = self.prev_weekday(datetime.now())
         now_date = self.to_date_list(datetime.now())
         for tick in tickers:
             existing = price_data[price_data['Tick'] == tick]
-
             tick_code = '%s.ax' % tick
-            start_datetime = datetime.strptime('Jan 1 2017  1:33PM', '%b %d %Y %I:%M%p')
+            start_datetime = datetime.strptime(start, "%Y-%m-%d").strftime('%Y-%m-%d')
             start_date = self.to_date_list(start_datetime)
             print(tick_code, start_date, now_date)
             try:
