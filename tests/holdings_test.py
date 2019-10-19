@@ -1,7 +1,7 @@
 ''' holdings tests '''
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-from mockportfolio import Holdings
+from mockportfolio.holdings import Holdings
 import pandas as pd
 # import sys
 # import os

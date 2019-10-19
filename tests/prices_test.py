@@ -2,7 +2,7 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 from datetime import datetime
-from mockportfolio import Prices
+from mockportfolio.prices import Prices
 # import sys
 # import os
 # sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
