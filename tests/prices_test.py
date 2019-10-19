@@ -1,11 +1,11 @@
 ''' prices tests '''
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-from mockportfolio import Holdings, Prices
-import pandas as pd
+from mockportfolio import Prices
+# import pandas as pd
 import sys
 import os
-from datetime import datetime, timedelta
+from datetime import datetime
 sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
 
 
