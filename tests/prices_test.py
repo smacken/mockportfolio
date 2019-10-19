@@ -1,12 +1,13 @@
 ''' prices tests '''
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
-from mockportfolio import Prices
-# import pandas as pd
-import sys
-import os
 from datetime import datetime
-sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
+from mockportfolio import Prices
+# import sys
+# import os
+# sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
+
+# import pandas as pd
 
 
 def test_ctor_prices():

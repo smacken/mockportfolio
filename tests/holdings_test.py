@@ -3,9 +3,9 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 from mockportfolio import Holdings
 import pandas as pd
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
+# import sys
+# import os
+# sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
 # import pytest
 
 # from pandas import DataFrame # Series,
