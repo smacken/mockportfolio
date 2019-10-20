@@ -2,6 +2,7 @@
 from yahoo_historical import Fetcher
 from datetime import datetime, timedelta
 import pandas as pd
+from collections import OrderedDict
 
 
 class Prices(object):
@@ -24,6 +25,15 @@ class Prices(object):
             adate -= timedelta(days=1)
         return adate
 
+    def next_weekday(self, adate):
+        ''' get the next workday '''
+        if adate.weekday() <= 4:
+            return adate
+        adate += timedelta(days=1)
+        while adate.weekday() > 4:  # Mon-Fri are 0-4
+            adate += timedelta(days=1)
+        return adate
+
     def get_asx(self, tick, start_date, end_date):
         ''' get prices for date range '''
         tick_code = '%s.ax' % tick
@@ -32,6 +42,19 @@ class Prices(object):
         time_series['Tick'] = tick
         time_series.rename(columns=lambda x: x.strip(), inplace=True)
         return time_series
+
+    def total_months(self, dt):
+        return dt.month + 12 * dt.year
+
+    def monthlist(self, dates):
+        ''' list of dates for first of the month between range '''
+        start, end = [datetime.strptime(_, "%Y-%m-%d") for _ in dates]
+        mlist = []
+        for tot_m in range(self.total_months(start) - 1, self.total_months(end)):
+            y, m = divmod(tot_m, 12)
+            # mlist.append(datetime(y, m + 1, 1).strftime("%b-%y"))
+            mlist.append(datetime(y, m + 1, 1))
+        return mlist
 
     def update(self, tickers, start='2017-01-09'):
         ''' update prices for a given set of tickers '''

@@ -12,8 +12,19 @@ class Holdings(object):
     def __init__(self, data_path='data/'):
         self.data_path = data_path
 
-    def generate(self):
+    def generate(self, total=10000):
         ''' generate holdings history frame '''
+
+        start = '2017-01-09'
+        end = '2018-12-27'
+        p = Prices(self.data_path)
+        portfolio = self.portfolio(start)
+        months = [p.next_weekday(x) for x in p.monthlist([start, end])]
+        for month in months:
+            ''' rebalance portfolio /adjust holdings'''
+            price_pivot = portfolio.loc[start:month]
+            weights = self.build_portfolio(price_pivot, total)
+            pass
         return pd.DataFrame()
 
     def listings(self):
@@ -50,7 +61,7 @@ class Holdings(object):
     def portfolio(self, date_start, portfolio_size=10):
         ticks = self.random_ticks(self.listings())
         prices = Prices(self.data_path)
-        tick_prices = prices.update(ticks.Tick.values)
+        tick_prices = prices.update(ticks.Tick.values, date_start)
         ticks = tick_prices.Tick.unique()
         if ticks < portfolio_size:
             pass
