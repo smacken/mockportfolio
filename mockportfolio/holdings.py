@@ -14,18 +14,18 @@ class Holdings(object):
 
     def generate(self, total=10000):
         ''' generate holdings history frame '''
-
         start = '2017-01-09'
         end = '2018-12-27'
         p = Prices(self.data_path)
         portfolio = self.portfolio(start)
+        holding_folio = {}
         months = [p.next_weekday(x) for x in p.monthlist([start, end])]
         for month in months:
             ''' rebalance portfolio /adjust holdings'''
             price_pivot = portfolio.loc[start:month]
             weights = self.build_portfolio(price_pivot, total)
-            pass
-        return pd.DataFrame()
+            holding_folio[month] = weights
+        return holding_folio
 
     def listings(self):
         ''' get a dataframe of all listed tickers '''
@@ -44,26 +44,34 @@ class Holdings(object):
         return df
 
     def build_portfolio(self, price_pivot, portfolio_total=10000):
-        ''' build a portfolio '''
+        ''' build a portfolio from price data'''
         mu = expected_returns.mean_historical_return(price_pivot)
         shrink = risk_models.CovarianceShrinkage(price_pivot)
         S = shrink.ledoit_wolf()
         ef = EfficientFrontier(mu, S, weight_bounds=(0, 0.2), gamma=0.8)
         weights = ef.max_sharpe()
+        weights = ef.clean_weights()
         latest_prices = get_latest_prices(price_pivot)
-
+        weights = {k: v for k, v in weights.items() if weights[k] > 0.0}
         da = DiscreteAllocation(weights, latest_prices, total_portfolio_value=portfolio_total)
         allocation, leftover = da.lp_portfolio()
         # print("Discrete allocation:", allocation)
-        weights = {k: v for k, v in weights.items() if weights[k] > 0.0}
-        return weights
+        return allocation
 
     def portfolio(self, date_start, portfolio_size=10):
+        ''' build a random portfolio of prices, presented in pivot '''
         ticks = self.random_ticks(self.listings())
         prices = Prices(self.data_path)
         tick_prices = prices.update(ticks.Tick.values, date_start)
-        ticks = tick_prices.Tick.unique()
-        if ticks < portfolio_size:
+        tick_prices = tick_prices[tick_prices.Tick.isin(ticks.Tick.values.tolist())]
+        tickers = tick_prices.Tick.unique()
+        if len(tickers) < portfolio_size:
+            # todo add additional random ticks
+            # remaining = portfolio_size - len(tickers)
+            # additional = self.random_ticks(self.listings(), remaining)
+            # add_prices = prices.update(additional.Tick.values, date_start)
+            # add_prices = add_prices[add_prices.Tick.isin(additional.Tick.values.tolist())]
+            # tick_prices.concat(add_prices)
             pass
 
         price_pivot = tick_prices.pivot(index='Date', columns='Tick', values='Close')

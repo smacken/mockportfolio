@@ -3,11 +3,6 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 from datetime import datetime
 from mockportfolio import Prices
-# import sys
-# import os
-# sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "mockportfolio"))
-
-# import pandas as pd
 
 
 def test_ctor_prices():
@@ -65,3 +60,10 @@ def test_monthlist_nextweek():
     p = Prices()
     months = [p.next_weekday(x) for x in p.monthlist([start, end])]
     assert len(months) == 24
+
+
+def test_update_for_tickers():
+    tickers = ['TNE', 'DMP']
+    p = Prices()
+    price_data = p.update(tickers, '2019-01-14')
+    assert len(price_data.Tick.values) > 0

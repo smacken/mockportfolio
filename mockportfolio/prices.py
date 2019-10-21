@@ -1,8 +1,7 @@
-''' '''
+''' stock price information '''
 from yahoo_historical import Fetcher
 from datetime import datetime, timedelta
 import pandas as pd
-from collections import OrderedDict
 
 
 class Prices(object):
@@ -65,11 +64,11 @@ class Prices(object):
             price_data = pd.DataFrame(data={'Tick': []})
 
         now = self.prev_weekday(datetime.now())
-        now_date = self.to_date_list(datetime.now())
+        now_date = self.to_date_list(now)
         for tick in tickers:
             existing = price_data[price_data['Tick'] == tick]
             tick_code = '%s.ax' % tick
-            start_datetime = datetime.strptime(start, "%Y-%m-%d").strftime('%Y-%m-%d')
+            start_datetime = datetime.strptime(start, "%Y-%m-%d")  # .strftime('%Y-%m-%d')
             start_date = self.to_date_list(start_datetime)
             print(tick_code, start_date, now_date)
             try:
