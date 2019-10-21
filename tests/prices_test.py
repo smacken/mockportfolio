@@ -65,5 +65,5 @@ def test_monthlist_nextweek():
 def test_update_for_tickers():
     tickers = ['TNE', 'DMP']
     p = Prices()
-    price_data = p.update(tickers, '2019-01-14')
+    price_data = p.update(tickers, '2019-10-01')
     assert len(price_data.Tick.values) > 0
