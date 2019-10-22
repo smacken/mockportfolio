@@ -45,7 +45,7 @@ snowballstemmer==2.0.0
 toml==0.10.0
 typed-ast==1.4.0
 urllib3==1.25.6
-virtualenv==16.7.6
+virtualenv==16.7.7
 wcwidth==0.1.7
 wincertstore==0.2
 wrapt==1.11.2
