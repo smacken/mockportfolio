@@ -6,5 +6,6 @@ from __future__ import (absolute_import, division, print_function,
 
 from .holdings import Holdings
 from .prices import Prices
+from .transactions import Transactions
 
-__all__ = ['Holdings', 'Prices']
+__all__ = ['Holdings', 'Prices', 'Transactions']

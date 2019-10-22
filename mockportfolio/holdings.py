@@ -12,19 +12,20 @@ class Holdings(object):
     def __init__(self, data_path='data/'):
         self.data_path = data_path
 
-    def generate(self, total=10000):
+    def generate(self, total=10000, start='2017-01-09', end='2018-12-27'):
         ''' generate holdings history frame '''
-        start = '2017-01-09'
-        end = '2018-12-27'
         p = Prices(self.data_path)
         portfolio = self.portfolio(start)
         holding_folio = {}
-        months = [p.next_weekday(x) for x in p.monthlist([start, end])]
+        months = [p.next_weekday(x).strftime('%Y-%m-%d') for x in p.monthlist([start, end])]
+        months.append(end)
         for month in months:
             ''' rebalance portfolio /adjust holdings'''
             price_pivot = portfolio.loc[start:month]
-            weights = self.build_portfolio(price_pivot, total)
-            holding_folio[month] = weights
+            if len(price_pivot.index) < 10:
+                continue
+            allocation = self.build_portfolio(price_pivot, total)
+            holding_folio[month] = allocation
         return holding_folio
 
     def listings(self):
@@ -66,12 +67,12 @@ class Holdings(object):
         tick_prices = tick_prices[tick_prices.Tick.isin(ticks.Tick.values.tolist())]
         tickers = tick_prices.Tick.unique()
         if len(tickers) < portfolio_size:
-            # todo add additional random ticks
-            # remaining = portfolio_size - len(tickers)
-            # additional = self.random_ticks(self.listings(), remaining)
-            # add_prices = prices.update(additional.Tick.values, date_start)
-            # add_prices = add_prices[add_prices.Tick.isin(additional.Tick.values.tolist())]
-            # tick_prices.concat(add_prices)
+            # add additional random ticks
+            remaining = portfolio_size - len(tickers)
+            additional = self.random_ticks(self.listings(), remaining)
+            add_prices = prices.update(additional.Tick.values, date_start)
+            add_prices = add_prices[add_prices.Tick.isin(additional.Tick.values.tolist())]
+            tick_prices = pd.concat([tick_prices, add_prices])
             pass
 
         price_pivot = tick_prices.pivot(index='Date', columns='Tick', values='Close')

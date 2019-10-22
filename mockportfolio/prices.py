@@ -55,6 +55,11 @@ class Prices(object):
             mlist.append(datetime(y, m + 1, 1))
         return mlist
 
+    def get_prices(self):
+        price_pkl = f'{self.data_path}Prices.pkl'
+        price_data = pd.read_pickle(price_pkl)
+        return price_data
+
     def update(self, tickers, start='2017-01-09'):
         ''' update prices for a given set of tickers '''
         price_pkl = f'{self.data_path}Prices.pkl'
@@ -80,6 +85,8 @@ class Prices(object):
                         continue
 
                 # fill in gaps i.e. xxx-start->end-xx-now
+                print(existing.Date.min())
+                print(existing.Date.max())
                 existing_min = datetime.strptime(existing.Date.min(), '%Y-%m-%d').date()
                 existing_max = datetime.strptime(existing.Date.max(), '%Y-%m-%d').date()
                 if start_datetime.date() < existing_min:
