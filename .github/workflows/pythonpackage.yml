@@ -33,7 +33,7 @@ jobs:
         pip install pytest
         pip install pytest-cov
         #pytest
-        pytest --cov=mockportfolio tests/
+        pytest --cov=mockportfolio mockportfolio/tests/
     - uses: codecov/codecov-action@v1.0.3
       with:
         token: ${{secrets.CODECOV_TOKEN}} #required
