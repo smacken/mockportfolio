@@ -30,7 +30,7 @@ jupyter==1.0.0
 jupyter-client==5.3.4
 jupyter-console==6.0.0
 jupyter-core==4.6.0
-lazy-object-proxy==1.4.2
+lazy-object-proxy==1.4.3
 lxml==4.4.1
 MarkupSafe==1.1.1
 mccabe==0.6.1
