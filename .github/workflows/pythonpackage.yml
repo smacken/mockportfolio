@@ -52,4 +52,5 @@ jobs:
         pep517.build
         --source
         --binary
-        --out-dir dist/:  
+        --out-dir dist/
+        .  
