@@ -13,7 +13,7 @@ decorator==4.4.1
 defusedxml==0.6.0
 empyrical==0.5.3
 entrypoints==0.3
-flake8==3.7.8
+flake8==3.7.9
 identify==1.4.7
 idna==2.8
 importlib-metadata==0.23
