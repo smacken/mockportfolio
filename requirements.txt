@@ -41,7 +41,7 @@ nbformat==4.4.0
 nodeenv==1.3.3
 noisyopt==0.2.2
 notebook==6.0.2
-numpy==1.17.3
+numpy==1.17.4
 packaging==19.2
 pandas==0.25.3
 pandas-datareader==0.8.1
