@@ -4,13 +4,21 @@ import os.path
 # import codecs  # To use a consistent encoding
 import setuptools
 import re
+import time
 
 here = os.path.abspath(os.path.dirname(__file__))
-
+now = str(round(time.time()))
 with open("README.md", "r") as f:
     desc = f.read()
     desc = desc.split("<!-- content -->")[-1]
     desc = re.sub("<[^<]+?>", "", desc)  # Remove html
+
+
+def get_property(prop, project):
+    ''' get a project property: from init '''
+    result = re.search(r'{}\s*=\s*[\'"]([^\'"]*)[\'"]'.format(prop), open(project + '/__init__.py').read())
+    return result.group(1)
+
 
 # Package name
 pname = 'mockportfolio'
@@ -20,12 +28,7 @@ gurl = 'https://github.com/smacken/' + 'trading-mock-portfolio'
 
 setuptools.setup(
     name=pname,
-
-    # Versions should comply with PEP440.  For a discussion on single-sourcing
-    # the version across setup.py and the project code, see
-    # https://packaging.python.org/en/latest/single_source_version.html
-    # version=__version__,
-
+    version=get_property('__version__', pname) + f'.{now}',
     description='Portfolio Engine',
     long_description=desc,
     long_description_content_type="text/markdown",
