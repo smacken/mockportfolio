@@ -50,7 +50,7 @@ jobs:
       run: >-
         python -m
         pep517.build
-        --source
+        --source mockportfolio
         --binary
         --out-dir dist/
         .  
