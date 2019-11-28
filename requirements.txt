@@ -61,7 +61,7 @@ Pygments==2.5.1
 pylint==2.4.4
 pyparsing==2.4.5
 pyportfolioopt==0.4.3
-pyrsistent==0.15.5
+pyrsistent==0.15.6
 pytest==5.3.1
 pytest-cov==2.8.1
 pytest-mock==1.12.0
