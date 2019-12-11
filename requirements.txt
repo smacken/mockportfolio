@@ -52,7 +52,7 @@ pluggy==0.13.1
 pre-commit==1.20.0
 prometheus-client==0.7.1
 prompt-toolkit==3.0.0
-PuLP==1.6.10
+PuLP==2.0
 py==1.8.0
 pycodestyle==2.5.0
 pydocstyle==4.0.1
