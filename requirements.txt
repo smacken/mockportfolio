@@ -93,4 +93,4 @@ widgetsnbextension==3.5.1
 wincertstore==0.2
 wrapt==1.11.2
 yahoo-historical==0.3.2
-zipp==0.6.0
+zipp==1.0.0
