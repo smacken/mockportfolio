@@ -43,7 +43,7 @@ noisyopt==0.2.2
 notebook==6.0.3
 numpy==1.18.1
 packaging==20.1
-pandas==1.0.0
+pandas==1.0.1
 pandas-datareader==0.8.1
 pandocfilters==1.4.2
 parso==0.6.1
