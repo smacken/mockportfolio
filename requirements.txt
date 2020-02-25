@@ -5,7 +5,7 @@ attrs==19.3.0
 backcall==0.1.0
 bleach==3.1.1
 certifi==2019.11.28
-cfgv==3.0.0
+cfgv==3.1.0
 chardet==3.0.4
 colorama==0.4.3
 coverage==5.0.3
