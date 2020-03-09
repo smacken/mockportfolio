@@ -51,7 +51,7 @@ pickleshare==0.7.5
 pluggy==0.13.1
 pre-commit==2.1.1
 prometheus-client==0.7.1
-prompt-toolkit==3.0.3
+prompt-toolkit==3.0.4
 PuLP==2.0
 py==1.8.1
 pycodestyle==2.5.0
