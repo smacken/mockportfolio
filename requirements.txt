@@ -14,7 +14,7 @@ defusedxml==0.6.0
 empyrical==0.5.3
 entrypoints==0.3
 flake8==3.7.9
-identify==1.4.12
+identify==1.4.14
 idna==2.9
 importlib-metadata==1.6.0
 ipykernel==5.2.0
