@@ -46,7 +46,7 @@ packaging==20.3
 pandas==1.0.3
 pandas-datareader==0.8.1
 pandocfilters==1.4.2
-parso==0.6.2
+parso==0.7.0
 pickleshare==0.7.5
 pluggy==0.13.1
 pre-commit==2.2.0
