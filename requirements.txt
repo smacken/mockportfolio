@@ -27,7 +27,7 @@ Jinja2==2.11.2
 joblib==0.14.1
 jsonschema==3.2.0
 jupyter==1.0.0
-jupyter-client==6.1.2
+jupyter-client==6.1.5
 jupyter-console==6.1.0
 jupyter-core==4.6.3
 lazy-object-proxy==1.4.3
